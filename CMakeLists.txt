@@ -50,6 +50,19 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     list(APPEND PRIMESIEVE_COMPILE_DEFINITIONS "ENABLE_ASSERT")
 endif()
 
+include(FetchContent)
+
+FetchContent_Declare(
+        BigInt
+        GIT_REPOSITORY https://github.com/SamHerts/BigInt.git
+        GIT_TAG        v1.0.0
+)
+
+FetchContent_MakeAvailable(BigInt)
+
+# Include the BigInt header
+include_directories(${bigint_SOURCE_DIR})
+
 # primesieve binary source files #####################################
 
 set(BIN_SRC src/app/CmdOptions.cpp
