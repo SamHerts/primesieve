@@ -23,6 +23,7 @@
 
 #include <stdint.h>
 #include <string>
+#include <bigint.h>
 
 namespace primesieve {
 
@@ -30,8 +31,8 @@ namespace primesieve {
 /// @vect: std::vector or other vector type that is API compatible
 ///        with std::vector.
 ///
-template <typename vect>
-inline void generate_primes(uint64_t stop, vect* primes)
+template <typename T, typename vect>
+inline void generate_primes(T stop, vect* primes)
 {
   if (primes)
     store_primes(0, stop, *primes);
@@ -41,8 +42,8 @@ inline void generate_primes(uint64_t stop, vect* primes)
 /// @vect: std::vector or other vector type that is API compatible
 ///        with std::vector.
 ///
-template <typename vect>
-inline void generate_primes(uint64_t start, uint64_t stop, vect* primes)
+template <typename T, typename vect>
+inline void generate_primes(T start, T stop, vect* primes)
 {
   if (primes)
     store_primes(start, stop, *primes);
@@ -52,8 +53,8 @@ inline void generate_primes(uint64_t start, uint64_t stop, vect* primes)
 /// @vect: std::vector or other vector type that is API compatible
 ///        with std::vector.
 ///
-template <typename vect>
-inline void generate_n_primes(uint64_t n, vect* primes)
+template <typename T, typename vect>
+inline void generate_n_primes(T n, vect* primes)
 {
   if (primes)
     store_n_primes(n, 0, *primes);
@@ -63,8 +64,8 @@ inline void generate_n_primes(uint64_t n, vect* primes)
 /// @vect: std::vector or other vector type that is API compatible
 ///        with std::vector.
 ///
-template <typename vect>
-inline void generate_n_primes(uint64_t n, uint64_t start, vect* primes)
+template <typename T, typename vect>
+inline void generate_n_primes(T n, T start, vect* primes)
 {
   if (primes)
     store_n_primes(n, start, *primes);
@@ -86,7 +87,8 @@ inline void generate_n_primes(uint64_t n, uint64_t start, vect* primes)
 ///           if n > 0 finds the nth prime > start, <br/>
 ///           if n < 0 finds the nth prime < start (backwards).
 ///
-uint64_t nth_prime(int64_t n, uint64_t start = 0);
+template <typename T>
+T nth_prime(T n, T start = 0);
 
 /// Count the primes within the interval [start, stop].
 /// By default all CPU cores are used, use
@@ -99,77 +101,90 @@ uint64_t nth_prime(int64_t n, uint64_t start = 0);
 /// many calls to count_primes() it may be preferable to use
 /// a primesieve::iterator which needs to be initialized only once.
 ///
-uint64_t count_primes(uint64_t start, uint64_t stop);
+template <typename T>
+T count_primes(uint64_t start, uint64_t stop);
 
 /// Count the twin primes within the interval [start, stop].
 /// By default all CPU cores are used, use
 /// primesieve::set_num_threads(int threads) to change the
 /// number of threads.
 ///
-uint64_t count_twins(uint64_t start, uint64_t stop);
+template <typename T>
+T count_twins(T start, uint64_t stop);
 
 /// Count the prime triplets within the interval [start, stop].
 /// By default all CPU cores are used, use
 /// primesieve::set_num_threads(int threads) to change the
 /// number of threads.
 ///
-uint64_t count_triplets(uint64_t start, uint64_t stop);
+template <typename T>
+T count_triplets(T start, T stop);
 
 /// Count the prime quadruplets within the interval [start, stop].
 /// By default all CPU cores are used, use
 /// primesieve::set_num_threads(int threads) to change the
 /// number of threads.
 ///
-uint64_t count_quadruplets(uint64_t start, uint64_t stop);
+template <typename T>
+T count_quadruplets(T start, T stop);
 
 /// Count the prime quintuplets within the interval [start, stop].
 /// By default all CPU cores are used, use
 /// primesieve::set_num_threads(int threads) to change the
 /// number of threads.
-///
-uint64_t count_quintuplets(uint64_t start, uint64_t stop);
+///\ntemplate <typename T>template <typename T>
+template <typename T>
+T count_quintuplets(T start, T stop);
 
 /// Count the prime sextuplets within the interval [start, stop].
 /// By default all CPU cores are used, use
 /// primesieve::set_num_threads(int threads) to change the
 /// number of threads.
 ///
-uint64_t count_sextuplets(uint64_t start, uint64_t stop);
+template <typename T>
+T count_sextuplets(T start, T stop);
 
 /// Print the primes within the interval [start, stop]
 /// to the standard output.
 ///
-void print_primes(uint64_t start, uint64_t stop);
+template <typename T>
+void print_primes(T start, T stop);
 
 /// Print the twin primes within the interval [start, stop]
 /// to the standard output.
 ///
-void print_twins(uint64_t start, uint64_t stop);
+template <typename T>
+void print_twins(T start, T stop);
 
 /// Print the prime triplets within the interval [start, stop]
 /// to the standard output.
 ///
-void print_triplets(uint64_t start, uint64_t stop);
+template <typename T>
+void print_triplets(T start, T stop);
 
 /// Print the prime quadruplets within the interval [start, stop]
 /// to the standard output.
 ///
-void print_quadruplets(uint64_t start, uint64_t stop);
+template <typename T>
+void print_quadruplets(T start, T stop);
 
 /// Print the prime quintuplets within the interval [start, stop]
 /// to the standard output.
 ///
-void print_quintuplets(uint64_t start, uint64_t stop);
+template <typename T>
+void print_quintuplets(T start, T stop);
 
 /// Print the prime sextuplets within the interval [start, stop]
 /// to the standard output.
 ///
-void print_sextuplets(uint64_t start, uint64_t stop);
+template <typename T>
+void print_sextuplets(T start, T stop);
 
 /// Returns the largest valid stop number for primesieve.
 /// @return 2^64-1 (UINT64_MAX).
 ///
-uint64_t get_max_stop();
+template <typename T>
+T get_max_stop();
 
 /// Get the current set sieve size in KiB.
 int get_sieve_size();
